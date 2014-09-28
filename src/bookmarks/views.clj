@@ -1,4 +1,5 @@
 (ns bookmarks.views
+  (:gen-class)
   (:require [clojure.string                 :refer [join]]
             [compojure.core                 :refer [defroutes GET PUT DELETE POST]]
             [compojure.handler              :refer [site]]

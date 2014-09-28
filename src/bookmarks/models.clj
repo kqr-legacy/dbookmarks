@@ -1,11 +1,12 @@
 (ns bookmarks.models
-  (:require [korma.db :refer [defdb postgres]]
+  (:require [clojure.java.io :as io]
+            [korma.db :refer [defdb postgres]]
             [korma.core :refer :all]
             [cemerick.friend.credentials :refer [hash-bcrypt]]))
 
 
 (defdb db
-  (let [db-uri (clojure.string/trim-newline (slurp "database.cfg"))
+  (let [db-uri (clojure.string/trim-newline (slurp (io/resource "database.cfg")))
         param-values (re-seq #"[?&]([^=]+)=([^&]+)" db-uri)
         db-params (into {} (for [[_ param value] param-values]
                              (hash-map (keyword param) value)))
